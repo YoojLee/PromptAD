@@ -28,6 +28,7 @@ def metric_cal_img(img_scores, gt_list, map_scores=None):
     img_roc_auc = roc_auc_score(gt_list, final_img_scores)
 
     result_dict = {'i_roc': img_roc_auc * 100,
+                   'i_roc_vad': roc_auc_score(gt_list, max_map_scores)*100,
                    'i_roc_prompt': roc_auc_score(gt_list, img_scores)*100}
 
     return result_dict

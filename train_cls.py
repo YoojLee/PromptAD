@@ -160,7 +160,7 @@ def fit(model,
             best_epoch = epoch
             best_i_roc = result_dict['i_roc']
 
-        pbar.set_postfix(Best_I_AUROC=best_i_roc, Best_I_AUROC_Prompt=best_i_roc_prompt, Best_Ep=best_epoch, Best_Ep_Prompt=best_epoch_prompt, Curr_I_AUROC=result_dict['i_roc'], Curr_I_AUROC_Prompt=result_dict['i_roc_prompt'])
+        pbar.set_postfix(Best_I_AUROC=best_i_roc, Best_I_AUROC_Prompt=best_i_roc_prompt, Best_Ep=best_epoch, Best_Ep_Prompt=best_epoch_prompt, I_AUROC=result_dict['i_roc'], I_AUROC_Mem=result_dict['i_roc_vad'], I_AUROC_Prompt=result_dict['i_roc_prompt'])
 
     return best_result_dict
 
