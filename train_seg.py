@@ -64,7 +64,7 @@ def fit(model,
     best_epoch, best_epoch_prompt = 0,0
 
     pbar = tqdm(range(args.Epoch), desc="Training Progress", file=sys.stdout)
-    for epoch in range(args.Epoch):
+    for epoch in pbar:
         for (data, mask, label, name, img_type) in train_data:
             data = [model.transform(Image.fromarray(cv2.cvtColor(f.numpy(), cv2.COLOR_BGR2RGB))) for f in data]
             data = torch.stack(data, dim=0).to(device)
@@ -148,6 +148,7 @@ def fit(model,
         if best_result_dict is None:
             best_result_dict = result_dict
             best_epoch = epoch
+            best_p_roc = result_dict['p_roc']
             save_check_point(model, check_path)
             if args.vis:
                 plot_sample_cv2(names, test_imgs, {'PromptAD': score_maps}, gt_mask_list, save_folder=img_dir)
@@ -155,6 +156,7 @@ def fit(model,
         elif best_result_dict['p_roc'] < result_dict['p_roc']:
             best_result_dict = result_dict
             best_epoch = epoch
+            best_p_roc = result_dict['p_roc']
             save_check_point(model, check_path)
             if args.vis:
                 plot_sample_cv2(names, test_imgs, {'PromptAD': score_maps}, gt_mask_list, save_folder=img_dir)
